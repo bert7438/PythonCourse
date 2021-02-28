@@ -37,6 +37,7 @@ def f21(x):
 
 def f22(x):
     d = x
+    d &= 0x00ffffff
     d <<= 8
     m = x
     m >>= 24
@@ -44,4 +45,4 @@ def f22(x):
 
 
 print(f21(['ioke', 'c++', 'tla', 1962, 1977]))
-print(f22(0x38f2e6f1))
+print(f22(0x9866ee43))
