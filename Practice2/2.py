@@ -44,5 +44,55 @@ def f22(x):
     return d | m
 
 
+def f23(table):
+    def transpose(tab):
+        return [list(row) for row in zip(*tab)]
+
+    z = transpose(table)
+    # remove empty columns
+    i = 0
+    while i < len(z):
+        zero_flag = True
+        for j in z[i]:
+            if j is not None:
+                zero_flag = False
+                break
+        if zero_flag:
+            del z[i]
+            i -= 1
+        i += 1
+    # split 2 column
+    z.insert(2, [])
+    for i in range(len(z[1])):
+        z[1][i] = z[1][i].split('&')
+    for i in range(len(z[1])):
+        t = z[1][i][1]
+        z[1][i].remove(t)
+        z[2].append(t)
+    z[1] = [z[1][i][0] for i in range(len(z[1]))]
+    # change to true and false
+    for i in range(len(z[0])):
+        z[0][i] = z[0][i].replace("Да", "true").replace("Нет", "false")
+    # round
+    for i in range(len(z[1])):
+        z[1][i] = round(float(z[1][i]), 2)
+    # truncate to last name
+    for i in range(len(z[2])):
+        z[2][i] = z[2][i].split(". ")
+    for i in range(len(z[2])):
+        z[2][i].remove(z[2][i][0])
+    z[2] = [z[2][i][0] for i in range(len(z[2]))]
+    print(z)
+
+    return z
+
+
 print(f21(['ioke', 'c++', 'tla', 1962, 1977]))
 print(f22(0x9866ee43))
+f23([["Нет", None, None, "0.720&Даниил Ц. Цозак"],
+     ["Нет", None, None, "0.967&Святослав Б. Чирянц"],
+     ["Да", None, None, "0.236&Ринат Р. Губев"]])
+f23([["Нет",None,None,"0.166&Герман Г. Рариди"],
+     ["Нет",None,None,"0.130&Эдуард З. Забишян"],
+     ["Да",None,None, "0.939&Роберт Ф. Китебов"],
+     ["Да",None,None,"0.039&Егор Д. Ронский"]])
