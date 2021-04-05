@@ -75,7 +75,7 @@ def f23(table):
         z[0][i] = z[0][i].replace("Да", "true").replace("Нет", "false")
     # round
     for i in range(len(z[1])):
-        z[1][i] = round(float(z[1][i]), 2)
+        z[1][i] = str(round(float(z[1][i]), 2))
     # truncate to last name
     for i in range(len(z[2])):
         z[2][i] = z[2][i].split(". ")
